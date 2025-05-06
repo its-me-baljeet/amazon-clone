@@ -1,60 +1,23 @@
-// components/CarouselCard.jsx
-import { useState, useEffect } from "react";
+import { Carousel } from "@material-tailwind/react";
 
-const carouselImages = [
-    "https://m.media-amazon.com/images/I/71QRxZvKnGL._SX3000_.jpg",
-    "https://m.media-amazon.com/images/I/71Ie3JXGfVL._SX3000_.jpg",
-    "https://m.media-amazon.com/images/I/61zAjw4bqPL._SX3000_.jpg",
-    "https://m.media-amazon.com/images/I/51AhVQ7fHwL._SX3000_.jpg",
-];
-
-const CarouselCard = () => {
-    const [index, setIndex] = useState(0);
-
-    // Auto-play every 4 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex(prev => (prev + 1) % carouselImages.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, []);
-
-    const prevSlide = () => {
-        setIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-    };
-
-    const nextSlide = () => {
-        setIndex((prev) => (prev + 1) % carouselImages.length);
-    };
-
+export default function CarouselDefault() {
     return (
-        <div className="relative w-full h-[300px] sm:h-[400px] overflow-hidden">
-            {carouselImages.map((img, i) => (
-                <img
-                    key={i}
-                    src={img}
-                    alt={`Slide ${i}`}
-                    className={`absolute w-full h-full object-cover transition-opacity duration-700 ${i === index ? 'opacity-100' : 'opacity-0'}`}
-                />
-            ))}
-
-            {/* Left Arrow */}
-            <button
-                onClick={prevSlide}
-                className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-70"
-            >
-                ❮
-            </button>
-
-            {/* Right Arrow */}
-            <button
-                onClick={nextSlide}
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-70"
-            >
-                ❯
-            </button>
-        </div>
+        <Carousel className="rounded-xl">
+            <img
+                src="https://images-eu.ssl-images-amazon.com/images/G/31/img24/Beauty/MaART25/Unrec1-pc._CB796676292_.jpg"
+                alt="image 1"
+                className="h-full w-full object-cover"
+            />
+            <img
+                src="https://images-eu.ssl-images-amazon.com/images/G/31/img15/GW/Mayart/25/op/rework/PC_Hero_Asin_3000x1200_OP._CB795267699_.jpg"
+                alt="image 2"
+                className="h-full w-full object-cover"
+            />
+            <img
+                src="https://images-eu.ssl-images-amazon.com/images/G/31/INSLGW/MayART25/PEA/sd_men_2x._CB794841919_.jpg"
+                alt="image 3"
+                className="h-full w-full object-cover"
+            />
+        </Carousel>
     );
-};
-
-export default CarouselCard;
+}
