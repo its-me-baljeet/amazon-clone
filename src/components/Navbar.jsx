@@ -1,8 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = ({ }) => {
+    const { cart } = useContext(CartContext);
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const navigate = useNavigate();
+    function handleSignIn() {
+        navigate("/signUp");
+    }
     return (
         <header className=" text-white">
 
@@ -42,7 +50,7 @@ const Navbar = ({ }) => {
                         <img src="/dropdown.png" alt="dropdown" />
                     </li>
                     <li className="text-sm">
-                        <p className="text-sm/3">Hello, sign in</p>
+                        <p className="text-sm/3">Hello, <span onClick={handleSignIn} className="cursor"> sign in </span></p>
                         <p className="flex font-bold">
                             Accounts & Lists
                             <span>
@@ -60,6 +68,11 @@ const Navbar = ({ }) => {
                         <Link to="/cart" className="flex items-center">
                             <img src="/cart.png" alt="cart" className="h-10 w-10" />
                             <p className="font-bold ml-1 self-end">Cart</p>
+                            {totalItems > 0 && (
+                                <span className="absolute -top-1 -right-2 bg-yellow-400 text-black text-xs rounded-full px-2">
+                                    {totalItems}
+                                </span>
+                            )}
                         </Link>
                     </li>
 

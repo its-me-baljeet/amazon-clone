@@ -1,5 +1,5 @@
 // data/products.js
-const products = [
+const data = [
     {
         id: 1,
         title: "Wireless Earbuds",
@@ -242,4 +242,4 @@ const products = [
     }
 ];
 
-export default products;
+export default data;
